@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <label for="base64">Base64</label>
+  <input name="base64" type="text" placeholder="Base64">
+  <button onClick="set()">Get colors</button>
+  <hr>
+  <img height="150px" id="imagem" src="" onload="calcular()">
+  <input type="color" name="predominante" id="predominante">
+  <hr>
+  <table>
+    <tr>
+      <td>Cor predominante:</td>
+      <td>
+        <div id="corPredominante" style="width: 50px; height: 50px;"></div>
+      </td>
+    </tr>
+  </table>
+  <script src="./tinycolor.js"></script>
+  <script src="index.js"></script>
+  <script>
+    let novoB64 = document.querySelector('input[name="base64"]')
+    let imagem = document.querySelector('#imagem')
+    const divPredominante = document.querySelector('#corPredominante')
+
+    function set () {
+      novoB64 = document.querySelector('input[name="base64"]').value
+      imagem = document.querySelector('#imagem')
+      imagem.src = novoB64
+    }
+
+    function calcular() {
+      const rgb = getAverageRGB(imagem)
+			console.log('LOGÃO: calcular -> rgb', rgb)
+      const hex = tinycolor(rgb).toHexString()
+			console.log('LOGÃO: calcular -> hex', hex)
+      divPredominante.style.backgroundColor = hex
+    }
+
+  </script>
+</body>
+</html>
